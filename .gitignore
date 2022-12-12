@@ -1,0 +1,7 @@
+web/.env
+bot/.env
+api/.env
+server/.env
+web/node_modules
+api/node_modules
+bot/node_modules
