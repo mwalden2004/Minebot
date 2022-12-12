@@ -4,9 +4,12 @@
   },
   "dependencies": {
     "bufferutil": "^4.0.7",
+    "discord-api-types": "^0.37.21",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "erlpack": "^0.1.4",
+    "mongodb": "^3.7.3",
+    "source-map-support": "^0.5.21",
     "typeorm": "^0.3.11",
     "utf-8-validate": "^5.0.10",
     "zlib-sync": "^0.1.7"

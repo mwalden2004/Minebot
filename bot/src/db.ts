@@ -5,6 +5,7 @@ export function createDataSource(): DataSource {
     type: 'mongodb',
 
     url: 'mongodb+srv://mwalden:NJOXr9p2KvLzcRY5@cluster0.bt5v83e.mongodb.net',
+    useUnifiedTopology: true,
 
     entities: ['build/app/**/*.entity.js'],
     migrations: ['build/migrations/*.js'],
