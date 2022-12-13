@@ -1,10 +1,11 @@
-import { CacheType, ChatInputCommandInteraction } from "discord.js";
+import { ExportType } from "../types/CommandExports";
 
-export default {
+const command: ExportType = {
     name: 'ping',
     description: 'Replies with Pong!',
-    executor: async (interaction: ChatInputCommandInteraction<CacheType>) => {
+    executor: async (interaction) => {
         await interaction.reply('Pong!');
-
     }
 }
+
+export default command

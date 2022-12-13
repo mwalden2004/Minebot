@@ -1,0 +1,7 @@
+name: MineBotVerificationPlugin
+version: 1.0
+main: app.minebot.verificationplugin.MainPlugin
+commands:
+   verify:
+      description: Allows users to verify with Minebot
+      usage: /verify <verification-code>

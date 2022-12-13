@@ -5,10 +5,10 @@ const typeorm_1 = require("typeorm");
 function createDataSource() {
     return new typeorm_1.DataSource({
         type: 'mongodb',
-        url: 'mongodb+srv://mwalden:NJOXr9p2KvLzcRY5@cluster0.bt5v83e.mongodb.net',
+        url: process.env.MONGO_DB_URL,
         useUnifiedTopology: true,
-        entities: ['build/app/**/*.entity.js'],
-        migrations: ['build/migrations/*.js'],
+        entities: ['dist/app/**/*.entity.js'],
+        migrations: ['dist/migrations/*.js'],
     });
 }
 exports.createDataSource = createDataSource;

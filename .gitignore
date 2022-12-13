@@ -5,3 +5,8 @@ server/.env
 web/node_modules
 api/node_modules
 bot/node_modules
+server/paper.jar
+server/versions
+server/logs
+server/libraries
+server/cache
