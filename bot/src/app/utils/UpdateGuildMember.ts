@@ -2,10 +2,13 @@ import { GuildMember, PartialGuildMember } from "discord.js";
 import { Guilds, Users } from "../entities";
 import { UUIDtoUsername } from "./Minecraft";
 
-export default async function UpdateGuildMember(member: GuildMember|PartialGuildMember): Promise<boolean>{
-
+export default async function UpdateGuildMember(member: GuildMember): Promise<boolean>{
+    
     const guildId = member.guild.id;
     const discordId = member.id;
+
+    await member.guild.fetch();
+    await member.guild.roles.fetch();
 
     const guild = await Guilds.findOne({where:{guildId}});
     const user = await Users.findOne({where:{discordId}});
@@ -23,9 +26,10 @@ export default async function UpdateGuildMember(member: GuildMember|PartialGuild
         const account = user.accounts.links[guildId]||user?.mainAccount;
 
         if (!account){
+            if (guild.unverifiedRole){
+                member.roles.add(guild.unverifiedRole);
+            }
             return false;
-        }else if (guild.unverifiedRole){
-            member.roles.add(guild.unverifiedRole);
         }
 
         const username = await UUIDtoUsername(account);
@@ -35,18 +39,24 @@ export default async function UpdateGuildMember(member: GuildMember|PartialGuild
             member.roles.add(guild.unverifiedRole);
         }
 
-        if (guild.nicknameTemplate){
-            member.setNickname(guild.nicknameTemplate.replaceAll('%username%', username));
-        }
-
         if (guild.verifiedRole){
             member.roles.add(guild.verifiedRole);
+            if (guild.unverifiedRole){
+                member.roles.remove(guild.unverifiedRole);
+            }
+        }
+
+        if (guild.nicknameTemplate){
+            member.setNickname(guild.nicknameTemplate.replaceAll('%username%', username));
         }
 
 
     }else{
         if (guild.unverifiedRole){
             member.roles.add(guild.unverifiedRole);
+            if (guild.verifiedRole){
+                member.roles.remove(guild.verifiedRole);
+            }
         }
         return true;
     }

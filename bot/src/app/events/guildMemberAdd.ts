@@ -3,5 +3,10 @@ import UpdateGuildMember from "../utils/UpdateGuildMember";
 
 export default async function GuildMemberAdd(member: GuildMember): Promise<void> {
     await member.fetch();
-    UpdateGuildMember(member);
+
+    try{
+        await UpdateGuildMember(member);
+    }catch(error){
+        console.log('guildMemberAdd.ts - ',error)
+    }
 }

@@ -7,7 +7,7 @@ const command: ExportType = {
     description: 'Set the verified nickname template for your members',
     options: [
         {
-            type: ApplicationCommandOptionType.Role,
+            type: ApplicationCommandOptionType.String,
             name: 'template',
             description: 'Choices for templates: %username%',
             required: true

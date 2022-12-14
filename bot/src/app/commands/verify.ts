@@ -52,7 +52,7 @@ const command: ExportType = {
         if (!foundUser){
             const newUser = new Users();
             newUser.discordId = interaction.user.id;
-            newUser.accounts = {};
+            newUser.accounts = {accounts: [], links: {}};
             newUser.created = new Date();
             await newUser.save();
         }
