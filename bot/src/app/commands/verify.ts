@@ -19,7 +19,7 @@ const command: ExportType = {
     ],
     executor: async (interaction) => {
         // Find the Minecraft users UUID, and ensure the account actually exists.
-        const username = interaction.options.getString('username') as string;
+        const username = interaction.options.getString('username', true) as string;
         const findUuid = await UsernameToUUID(username);
         if (typeof(findUuid) !== 'string') {
             return await interaction.reply({embeds:[EmbedCreator({title: 'We could not find your Minecraft account', color: 'Red'})]});

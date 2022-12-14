@@ -31,6 +31,9 @@ export default async function FinishedVerifyingButton(interaction: ButtonInterac
 
     // Add the users new account, and then save it.
     foundUser.accounts[foundPending.uuid] = {guilds: []};
+    if (!foundUser.mainAccount){
+        foundUser.mainAccount=foundPending.uuid;
+    }
     await foundUser.save();
     await foundPending.remove();
 

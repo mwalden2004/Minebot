@@ -16,8 +16,9 @@ export class BotController {
 
     if (foundVerification){
       foundVerification.verified = true;
+
       await foundVerification.save();
-      return new HttpResponseOK('Successfully verified!')
+      return new HttpResponseOK('Successfully verified! Please finish verifying by pressing the "I\'ve Finished Verifying" button on Discord.')
     }
     return new HttpResponseOK('We were not able to verify your identity, please try again.')
   }

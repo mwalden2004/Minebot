@@ -16,6 +16,9 @@ export class Users extends BaseEntity {
   }
 
   @Column()
+  mainAccount?: string;
+
+  @Column()
   created: Date;
 
 }

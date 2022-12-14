@@ -19,14 +19,15 @@ const command: ExportType = {
         if (!interaction.guild){
             return false;
         }
-        const role = interaction.options.getRole('role');
+        const role = interaction.options.getRole('role', true);
         const guildId = interaction.guild.id;
 
         const guild = await Guilds.findOne({where:{guildId: guildId}});
 
-        if (!guild || !role){
+        if (!guild){
             return false; // this should never happen.
         }
+
 
         guild.unverifiedRole = role.id;
         await guild.save();
