@@ -12,3 +12,14 @@ server/libraries
 server/cache
 server/world
 server/plugins
+web/.next
+web/.vscode
+node_modules
+server/crash-reports
+server/cache
+server/versions
+server/.console_history
+server/plugin/jar
+bot/dist
+api/build
+api/node_modules
