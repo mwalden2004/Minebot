@@ -1,0 +1,18 @@
+{
+  "port": "5000",
+  "settings": {
+    "loggerFormat": "tiny",
+    "session": {
+      "store": "@foal/typeorm"
+    }
+  },
+  "database": {
+    "type": "mongodb",
+    "url": "env(MONGO_DB_URL)"
+  },
+  "discord": {
+    "token": "env(DISCORD_TOKEN)",
+    "client_id": "env(DISCORD_CLIENT_ID)",
+    "client_secret": "env(DISCORD_CLIENT_SECRET)"
+  }
+}
