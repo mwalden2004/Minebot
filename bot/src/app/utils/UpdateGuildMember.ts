@@ -3,7 +3,7 @@ import { Guilds, Users } from "../entities";
 import { UUIDtoUsername } from "./Minecraft";
 
 export default async function UpdateGuildMember(member: GuildMember): Promise<boolean>{
-    
+
     const guildId = member.guild.id;
     const discordId = member.id;
 
@@ -47,7 +47,7 @@ export default async function UpdateGuildMember(member: GuildMember): Promise<bo
         }
 
         if (guild.nicknameTemplate){
-            member.setNickname(guild.nicknameTemplate.replaceAll('%username%', username));
+            member.setNickname(guild.nicknameTemplate.replaceAll('%username%', username)).catch(errr=>{})
         }
 
 
