@@ -1,6 +1,8 @@
 import { Client } from 'discord.js';
 import GuildCreate from './events/guildCreate';
 import GuildDelete from './events/guildDelete';
+import GuildMemberAdd from './events/guildMemberAdd';
+import GuildMemberRemove from './events/GuildMemberRemove';
 import InteractionCreate from './events/interactionCreate';
 import Ready from './events/ready';
 import initalizeCommands from './utils/InitalizeCommands';
@@ -22,6 +24,8 @@ export default async function StartDiscordBot(): Promise<void> {
     client.on('interactionCreate', (interaction) => { InteractionCreate(interaction, commands) });
     client.on('guildCreate', GuildCreate)
     client.on('guildDelete', GuildDelete)
+    client.on('guildMemberAdd', GuildMemberAdd)
+    client.on('guildMemberRemove', GuildMemberRemove)
 
 
     client.login(TOKEN);
