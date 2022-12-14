@@ -47,14 +47,12 @@ const command: ExportType = {
             return await interaction.reply({embeds:[EmbedCreator({title: 'You must verify before you can use this command!', color: 'Red'})]});
         }
 
-        if (!userAccount.accounts[uuid]){
+        if (!userAccount.accounts.accounts.includes(uuid)){
             return await interaction.reply({embeds:[EmbedCreator({title: `You must verify with ${username} before you can use this command!`, color: 'Red'})]});
         }
 
         if (where == 'here'){
-            if (!userAccount.accounts[uuid].guilds.includes(interaction.guildId)){
-                userAccount.accounts[uuid].guilds.push(interaction.guildId)
-            }
+            userAccount.accounts.links[interaction.guildId] = uuid;
         }else{
             userAccount.mainAccount = uuid;
         }

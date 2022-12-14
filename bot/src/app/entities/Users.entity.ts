@@ -12,7 +12,8 @@ export class Users extends BaseEntity {
 
   @Column()
   accounts: {
-    [uuid: string]: {guilds: string[];}
+    accounts: string[];
+    links: {[guildId: string]: string};
   }
 
   @Column()

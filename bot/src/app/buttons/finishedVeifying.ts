@@ -25,12 +25,12 @@ export default async function FinishedVerifyingButton(interaction: ButtonInterac
     if (!foundUser) {
         foundUser = new Users();
         foundUser.discordId = interaction.user.id;
-        foundUser.accounts = {};
+        foundUser.accounts = {accounts: [], links: {}};
         foundUser.created = new Date();
     }
 
     // Add the users new account, and then save it.
-    foundUser.accounts[foundPending.uuid] = {guilds: []};
+    foundUser.accounts.accounts.push(foundPending.uuid)
     if (!foundUser.mainAccount){
         foundUser.mainAccount=foundPending.uuid;
     }
