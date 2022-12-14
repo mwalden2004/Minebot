@@ -20,7 +20,8 @@ export default async function initalizeCommands(TOKEN: string, CLIENT_ID: string
     rest.put(Routes.applicationCommands(CLIENT_ID), { body: toSend }).then(() => {
         console.log(`Successfully registered commands: ${toSend.map(a => a.name).join(", ")}`)
     }).catch((e) => {
-        console.log(`Somethinhg went wrong registering commands: ${toSend.map(a => a.name).join(", ")}`, e)
+        console.log(`Somethinhg went wrong registering commands: ${toSend.map(a => a.name).join(", ")}`)
+        console.log(JSON.stringify(e.rawError))
     })
 
     return commands;

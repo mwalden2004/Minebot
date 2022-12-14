@@ -1,4 +1,5 @@
-import { ApplicationCommandOptionData, CacheType, ChatInputCommandInteraction } from "discord.js";
+import { ApplicationCommandOptionData, ApplicationCommandOptionType, CacheType, ChatInputCommandInteraction } from "discord.js";
+import OptionsType from "./OptionsType";
 
 export enum DiscordPermissionsBitwiseFlags {
     CREATE_INSTANT_INVITE = 0x0000000000000001,
@@ -47,7 +48,7 @@ export enum DiscordPermissionsBitwiseFlags {
 export type ExportType = {
     name: string;
     description: string;
-    options?: any;
+    options?: OptionsType;
     dm_permission?: boolean;
     default_member_permissions?: DiscordPermissionsBitwiseFlags;
     executor: (interaction: ChatInputCommandInteraction<CacheType>) => Promise<any>;
