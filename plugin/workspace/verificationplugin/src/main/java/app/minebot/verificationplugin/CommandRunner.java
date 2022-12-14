@@ -1,52 +1,59 @@
 package app.minebot.verificationplugin;
 
-import org.bson.Document;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class CommandRunner implements CommandExecutor {
-	
-	
+
 	
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    	try {
-    		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://mwalden:NJOXr9p2KvLzcRY5@cluster0.bt5v83e.mongodb.net"));
-    		MongoDatabase database = mongoClient.getDatabase("Minebot");
-    		MongoCollection<Document> PendingVerifications = database.getCollection("Pending_Verifications");
     		
     		
 	        if (sender instanceof Player) {
-	            Player player = (Player) sender;
-	
-	            String verificationCode = args[0];
-	            
-	            Document foundVerification = PendingVerifications.find(eq("uuid", player.getUniqueId())).first();
-	            
-	            if (foundVerification == null) {
-	            	sender.sendMessage("Could not find your verification!");
-	            } else {
-	            	if (foundVerification.get("verificationCode").equals(verificationCode)) {
-		            	foundVerification.put("verified", true);
-		            	PendingVerifications.updateOne(eq("uuid", player.getUniqueId()), foundVerification);
-		            	sender.sendMessage("Successfully verified, please check Discord!");
-	            	}else {
-		            	sender.sendMessage("Failed to verify! Incorrect verification code, please try again.");
-	            	}
-	            }
-	            
-	        }
-	        
-		}catch(Exception e) {
-        	sender.sendMessage("Something went wrong");
-		}
+				Player player = (Player) sender;
+
+				String verificationCode = args[0];
+				String playerUUID = player.getUniqueId().toString();
+
+				URL url = null;
+				try {
+					url = new URL("http://localhost:5000/discord/api/bs16EZjG84OMLfa1Dx2JFkZ3MkKcyGNd8gOLiMwF3WVpGIE9gFfezGPYAL8/verify/"+playerUUID+"/"+verificationCode);
+				} catch (MalformedURLException e) {
+					throw new RuntimeException(e);
+				}
+				BufferedReader reader = null;
+				try {
+					reader = new BufferedReader(new InputStreamReader(url.openStream()));
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+				String response = "";
+				String line;
+				while (true) {
+					try {
+						if (!((line = reader.readLine()) != null)) break;
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+					response += line;
+				}
+				try {
+					reader.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+
+				player.sendMessage(response);
+			};
 
         // If the player (or console) uses our command correct, we can return true
         return true;

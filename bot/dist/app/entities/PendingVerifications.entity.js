@@ -31,6 +31,10 @@ __decorate([
 ], PendingVerifications.prototype, "verificationCode", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
+    __metadata("design:type", Boolean)
+], PendingVerifications.prototype, "verified", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
 ], PendingVerifications.prototype, "created", void 0);
 PendingVerifications = __decorate([

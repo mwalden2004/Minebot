@@ -167,6 +167,8 @@ world-settings:
     dragon-death-sound-radius: 0
     hanging-tick-frequency: 100
     verbose: false
+  worldeditregentempworld:
+    verbose: false
 config-version: 12
 stats:
   disable-saving: false

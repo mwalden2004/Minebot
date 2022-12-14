@@ -5,7 +5,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Verification Plugin</name>
   <description>Allows for verification for the Miner</description>
-      <repositories>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+    <repositories>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
@@ -19,10 +23,7 @@
 			<version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-	    <dependency>
-	        <groupId>org.mongodb</groupId>
-	        <artifactId>mongo-java-driver</artifactId>
-	        <version>3.0.4</version>
-	    </dependency>
+
+
     </dependencies>
 </project>

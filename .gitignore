@@ -10,3 +10,5 @@ server/versions
 server/logs
 server/libraries
 server/cache
+server/world
+server/plugins

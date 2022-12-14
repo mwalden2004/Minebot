@@ -5,6 +5,7 @@ const EmbedCreator_1 = require("../utils/EmbedCreator");
 const discord_js_1 = require("discord.js");
 const Minecraft_1 = require("../utils/Minecraft");
 const PendingVerifications_entity_1 = require("../entities/PendingVerifications.entity");
+const entities_1 = require("../entities");
 const command = {
     name: 'verify',
     description: 'Link your Minecraft account with Discord!',
@@ -17,11 +18,13 @@ const command = {
         },
     ],
     executor: async (interaction) => {
+        // Find the Minecraft users UUID, and ensure the account actually exists.
         const username = interaction.options.getString('username');
         const findUuid = await (0, Minecraft_1.UsernameToUUID)(username);
         if (typeof (findUuid) !== 'string') {
             return await interaction.reply({ embeds: [(0, EmbedCreator_1.default)({ title: 'We could not find your Minecraft account', color: 'Red' })] });
         }
+        // Generate a unique-id for the verification code, and give the user the instructions to verify.
         const verificationCode = (0, uuid_1.v4)();
         const newEmbed = (0, EmbedCreator_1.default)({ title: 'Verification Instructions' });
         newEmbed.addFields({
@@ -34,13 +37,29 @@ const command = {
             name: 'Step 3: Return here to finish verifying',
             value: 'Confirm you were successfully verified.'
         });
+        // Add our pending verification to our database.
         const newPendingVerification = new PendingVerifications_entity_1.PendingVerifications();
         newPendingVerification.uuid = findUuid;
         newPendingVerification.discordId = interaction.user.id;
         newPendingVerification.verificationCode = verificationCode;
         newPendingVerification.created = new Date();
         await newPendingVerification.save();
-        await interaction.reply({ embeds: [newEmbed] });
+        // If the user does not have an account, we will go ahead and create one.
+        const foundUser = await entities_1.Users.findOne({ where: { discordId: interaction.user.id } });
+        if (!foundUser) {
+            const newUser = new entities_1.Users();
+            newUser.discordId = interaction.user.id;
+            newUser.accounts = {};
+            newUser.created = new Date();
+            await newUser.save();
+        }
+        // Create the "I've finished verifying" button, and send the reply to the interaction.
+        const finishedVerifyingButton = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder().setCustomId('finishedVeifying').setLabel('I\'ve Finished Verifying').setStyle(discord_js_1.ButtonStyle.Success));
+        await interaction.reply({
+            embeds: [newEmbed],
+            //@ts-expect-error ?
+            components: [finishedVerifyingButton]
+        });
     }
 };
 exports.default = command;

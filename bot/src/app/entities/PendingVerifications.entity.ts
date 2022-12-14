@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ObjectID, ObjectIdColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity()
 export class PendingVerifications extends BaseEntity {
@@ -14,6 +14,9 @@ export class PendingVerifications extends BaseEntity {
 
   @Column()
   verificationCode: string;
+
+  @Column()
+  verified?: boolean;
 
   @Column()
   created: Date;
