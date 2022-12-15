@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 import { dataSource } from './db';
-import StartDiscordBot from './app/bot';
+import StartDiscordBot from './app/shard.bot';
 
 
 async function main() {

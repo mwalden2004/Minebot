@@ -4,7 +4,7 @@ import CommandRESTExports from "../types/CommandRESTExports";
 import { readdirSync } from 'fs';
 import { join } from 'path';
 
-export default async function initalizeCommands(TOKEN: string, CLIENT_ID: string): Promise<{ [name: string]: ExportType }> {
+export default async function initalizeCommands(TOKEN: string, CLIENT_ID: string, sendApiRequest: boolean): Promise<{ [name: string]: ExportType }> {
     let toSend: CommandRESTExports[] = [];
     let commands = {};
 
@@ -16,13 +16,15 @@ export default async function initalizeCommands(TOKEN: string, CLIENT_ID: string
         };
     }
 
-    const rest = new REST({ version: '10' }).setToken(TOKEN);
-    rest.put(Routes.applicationCommands(CLIENT_ID), { body: toSend }).then(() => {
-        console.log(`Successfully registered commands: ${toSend.map(a => a.name).join(", ")}`)
-    }).catch((e) => {
-        console.log(`Somethinhg went wrong registering commands: ${toSend.map(a => a.name).join(", ")}`)
-        console.log(JSON.stringify(e.rawError))
-    })
+    if (sendApiRequest) {
+        const rest = new REST({ version: '10' }).setToken(TOKEN);
+        rest.put(Routes.applicationCommands(CLIENT_ID), { body: toSend }).then(() => {
+            console.log(`Successfully registered commands: ${toSend.map(a => a.name).join(", ")}`)
+        }).catch((e) => {
+            console.log(`Somethinhg went wrong registering commands: ${toSend.map(a => a.name).join(", ")}`)
+            console.log(JSON.stringify(e.rawError))
+        })
+    }
 
     return commands;
 }
