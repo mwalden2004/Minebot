@@ -18,7 +18,7 @@ const transferFeatures = [
     id: 1,
     name: 'Powerful Automations',
     description:
-      'MineBot is built for extensabillity, and has many automations to make your life as a community-manager easy.',
+      'Automations that make community management a breeze',
     icon: BoltIcon,
   },
   {
@@ -41,7 +41,7 @@ const communicationFeatures = [
     id: 1,
     name: 'Constantly Developed',
     description:
-      'MineBot is constantly adding new features, and fixing bugs.',
+      'Reliable and constantly developed to provide the best possible experience. Extensive utilities and a growing list of planned features',
     icon: BeakerIcon,
   },
   {
@@ -185,7 +185,7 @@ export default function Home() {
                   The leading Minecraft verification bot
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                  Stop using old and outdated methods of keeping track of your Minecraft users, use MineBot
+                Connect your Minecraft account with Discord using Minebot
                 </p>
                 <div className="mt-8 flex gap-x-4 sm:justify-center">
                   <a
@@ -277,7 +277,7 @@ export default function Home() {
 
         <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
           <div className="relative">
-            <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">See how it will help you</h3>
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">What sets MineBot apart?</h3>
             <p className="mt-3 text-lg text-gray-500">
               With its ever-growning utillities, and growing list of feature plans it is the obvious choice for running your community.
             </p>
@@ -354,9 +354,9 @@ export default function Home() {
         <div className="relative mt-12 sm:mt-16 lg:mt-24">
           <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:items-center lg:gap-8">
             <div className="lg:col-start-2">
-              <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">It&apos;s reliable</h3>
+              <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Why choose MineBot? Simple... It&apos;s reliable</h3>
               <p className="mt-3 text-lg text-gray-500">
-                Always online, and always growing -- whats more to love?
+                Always online, and always growing -- what&apos;s more to love?
               </p>
 
               <dl className="mt-10 space-y-10">
