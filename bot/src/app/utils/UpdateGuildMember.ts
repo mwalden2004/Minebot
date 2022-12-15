@@ -35,19 +35,18 @@ export default async function UpdateGuildMember(member: GuildMember): Promise<bo
         const username = await UUIDtoUsername(account);
         if (!username || typeof(username) !== 'string'){
             return false;
-        }else if (guild.unverifiedRole){
-            member.roles.add(guild.unverifiedRole);
         }
 
         if (guild.verifiedRole){
             member.roles.add(guild.verifiedRole);
-            if (guild.unverifiedRole){
-                member.roles.remove(guild.unverifiedRole);
-            }
         }
 
         if (guild.nicknameTemplate){
             member.setNickname(guild.nicknameTemplate.replaceAll('%username%', username)).catch(errr=>{})
+        }
+
+        if (guild.unverifiedRole){
+            member.roles.remove(guild.unverifiedRole);
         }
 
 
