@@ -1,6 +1,6 @@
 import { GuildMember, PartialGuildMember } from "discord.js";
 import { Guilds, Users } from "../entities";
-import { UUIDtoUsername } from "./aaa";
+import { UUIDtoUsername } from "./Minecraft";
 
 export default async function UpdateGuildMember(member: GuildMember): Promise<boolean>{
 

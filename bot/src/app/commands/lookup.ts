@@ -2,7 +2,7 @@ import { ApplicationCommandOptionType } from 'discord.js';
 import fetch from 'node-fetch';
 import { ExportType } from "../types/CommandExports";
 import EmbedCreator from '../utils/EmbedCreator';
-import { UsernameToUUID, UUIDtoUsername } from '../utils/aaa'
+import { UsernameToUUID, UUIDtoUsername } from '../utils/Minecraft'
 
 const command: ExportType = {
     name: 'lookup',

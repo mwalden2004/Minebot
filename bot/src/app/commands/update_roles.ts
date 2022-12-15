@@ -1,6 +1,6 @@
 import { ExportType } from "../types/CommandExports";
 import { ApplicationCommandOptionType } from "discord.js";
-import { UsernameToUUID } from "../utils/aaa";
+import { UsernameToUUID } from "../utils/Minecraft";
 import { Users } from "../entities";
 import EmbedCreator from "../utils/EmbedCreator";
 import UpdateGuildMember from "../utils/UpdateGuildMember";
