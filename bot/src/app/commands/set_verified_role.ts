@@ -31,7 +31,7 @@ const command: ExportType = {
         guild.verifiedRole = role.id;
         await guild.save();
 
-        await interaction.reply({embeds: [EmbedCreator({title: `Successfully updated your verified role to ${role.name}`})]})
+        await interaction.reply({ephemeral: true,embeds: [EmbedCreator({title: `Successfully updated your verified role to ${role.name}`})]})
 
     }
 }

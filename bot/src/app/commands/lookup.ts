@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType } from 'discord.js';
+import { ApplicationCommandOptionType, Embed } from 'discord.js';
 import fetch from 'node-fetch';
 import { ExportType } from "../types/CommandExports";
 import EmbedCreator from '../utils/EmbedCreator';
@@ -36,7 +36,7 @@ const command: ExportType = {
             });
             embed.setThumbnail(`https://crafatar.com/avatars/${found_uuid}`)
 
-            return await interaction.reply({embeds: [embed]});
+            return await interaction.reply({ephemeral: true, embeds: [embed]});
         }
         if (uuid){
             const found_name = await UUIDtoUsername(uuid);
@@ -52,9 +52,9 @@ const command: ExportType = {
             });
             embed.setThumbnail(`https://crafatar.com/avatars/${uuid}`)
 
-            return await interaction.reply({embeds: [embed]});
+            return await interaction.reply({ephemeral: true, embeds: [embed]});
         }
-        return interaction.reply('You must provide either a Minecraft player username, or UUID!')
+        return interaction.reply({ephemeral: true, embeds: [EmbedCreator({color: 'Red', title: 'You must provide either a Minecraft player username, or UUID!'})]})
     }
 }
 

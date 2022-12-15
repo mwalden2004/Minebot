@@ -10,12 +10,12 @@ export default async function FinishedVerifyingButton(interaction: ButtonInterac
 
     // If we couldn't find any, we'll reply with an error telling them we couldn't find it.
     if (!foundPending) {
-        return interaction.reply({embeds: [EmbedCreator({title: 'We could not find your verification', description: 'Please use the /verify command, then try again.', color: 'Red'})]})
+        return interaction.reply({ephemeral: true, embeds: [EmbedCreator({title: 'We could not find your verification', description: 'Please use the /verify command, then try again.', color: 'Red'})]})
     }
 
     // If we found the verification, but the user did not finish verifying then we will prompt them to try again.
     if (!foundPending.verified){
-        return interaction.reply({embeds: [EmbedCreator({title: 'You did not finish verifying', description: 'Please follow the instructions, then try again.', color: 'Red'})]})
+        return interaction.reply({ephemeral: true, embeds: [EmbedCreator({title: 'You did not finish verifying', description: 'Please follow the instructions, then try again.', color: 'Red'})]})
     }
 
     // Find the users account
@@ -38,6 +38,6 @@ export default async function FinishedVerifyingButton(interaction: ButtonInterac
     await foundPending.remove();
 
     // Tell the user it was successfull.
-    return interaction.reply({embeds: [EmbedCreator({title: 'Thank you for verifying!', description: 'You have been successfully verified!', color: 'Green'})]})
+    return interaction.reply({ephemeral: true, embeds: [EmbedCreator({title: 'Thank you for verifying!', description: 'You have been successfully verified!', color: 'Green'})]})
 
 }

@@ -66,7 +66,8 @@ const command: ExportType = {
         await interaction.reply({
             embeds:[newEmbed],
             //@ts-expect-error ?
-            components: [finishedVerifyingButton]
+            components: [finishedVerifyingButton],
+            ephemeral: true
         });
     }
 }

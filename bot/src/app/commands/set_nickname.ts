@@ -30,7 +30,7 @@ const command: ExportType = {
         await guild.save();
 
 
-        await interaction.reply({embeds: [EmbedCreator({title: `Successfully updated your nickname template to ${template}`})]})
+        await interaction.reply({ephemeral: true, embeds: [EmbedCreator({title: `Successfully updated your nickname template to ${template}`})]})
 
     }
 }

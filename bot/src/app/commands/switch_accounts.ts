@@ -39,16 +39,16 @@ const command: ExportType = {
         const where = interaction.options.getString('where', true) as 'globally'|'here';
         const uuid = await UsernameToUUID(username);
         if (typeof(uuid) !== 'string') {
-            return await interaction.reply({embeds:[EmbedCreator({title: 'We could not find your Minecraft account', color: 'Red'})]});
+            return await interaction.reply({ephemeral: true, embeds:[EmbedCreator({title: 'We could not find your Minecraft account', color: 'Red'})]});
         }
 
         const userAccount = await Users.findOne({where:{discordId: interaction.user.id}});
         if (!userAccount) {
-            return await interaction.reply({embeds:[EmbedCreator({title: 'You must verify before you can use this command!', color: 'Red'})]});
+            return await interaction.reply({ephemeral: true, embeds:[EmbedCreator({title: 'You must verify before you can use this command!', color: 'Red'})]});
         }
 
         if (!userAccount.accounts.accounts.includes(uuid)){
-            return await interaction.reply({embeds:[EmbedCreator({title: `You must verify with ${username} before you can use this command!`, color: 'Red'})]});
+            return await interaction.reply({ephemeral: true, embeds:[EmbedCreator({title: `You must verify with ${username} before you can use this command!`, color: 'Red'})]});
         }
 
         if (where == 'here'){
@@ -57,7 +57,7 @@ const command: ExportType = {
             userAccount.mainAccount = uuid;
         }
         await userAccount.save();
-        return await interaction.reply({embeds:[EmbedCreator({title: `Successfully changed your primary verified account`, color: 'Green'})]});
+        return await interaction.reply({ephemeral: true, embeds:[EmbedCreator({title: `Successfully changed your primary verified account`, color: 'Green'})]});
 
     }
 }

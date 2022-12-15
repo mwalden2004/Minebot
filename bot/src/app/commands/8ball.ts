@@ -21,7 +21,7 @@ const command: ExportType = {
 
         if (!questionAsked){
             return interaction.reply({
-                embeds: [EmbedCreator({ title: '🎱 8-ball', description: 'You must provide a question!', color: 'Red' })]
+                ephemeral: true, embeds: [EmbedCreator({ title: '🎱 8-ball', description: 'You must provide a question!', color: 'Red' })]
             })
         }
 
@@ -34,7 +34,7 @@ const command: ExportType = {
         });
 
         return interaction.reply({
-            embeds: [embed]
+            ephemeral: true, embeds: [embed]
         })
     }
 }

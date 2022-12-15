@@ -20,7 +20,7 @@ const command: ExportType = {
 
         try{
             const success = await UpdateGuildMember(member);
-            await interaction.reply({embeds:[EmbedCreator({title: success?`Successfully updated your roles and nickname.`:`Something went wrong while updating your profile`, color: success?'Green':'Red'})]});
+            await interaction.reply({ephemeral: true, embeds:[EmbedCreator({title: success?`Successfully updated your roles and nickname.`:`Something went wrong while updating your profile`, color: success?'Green':'Red'})]});
         }catch(error){
             console.log('update_roles.ts - ',error)
         }
