@@ -13,11 +13,11 @@ export default async function UpdateGuildMember(member: GuildMember): Promise<bo
     const guild = await Guilds.findOne({where:{guildId}});
     const user = await Users.findOne({where:{discordId}});
 
-    if (!guild || !user){
+    if (!guild){
         return false;
     }
 
-    const isVerified = Object.keys(user.accounts).length !== 0;
+    const isVerified = user && Object.keys(user.accounts).length !== 0;
 
     if (isVerified){
 
