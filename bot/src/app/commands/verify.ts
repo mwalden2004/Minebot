@@ -2,7 +2,7 @@ import { ExportType } from "../types/CommandExports";
 import { v4 } from 'uuid';
 import EmbedCreator from "../utils/EmbedCreator";
 import { ActionRowBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonStyle } from "discord.js";
-import { UsernameToUUID } from "../utils/Minecraft";
+import { UsernameToUUID } from "../utils/aaa";
 import { PendingVerifications } from "../entities/PendingVerifications.entity";
 import { Users } from "../entities";
 
