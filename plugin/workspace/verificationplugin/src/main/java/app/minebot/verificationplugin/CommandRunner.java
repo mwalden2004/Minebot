@@ -26,7 +26,7 @@ public class CommandRunner implements CommandExecutor {
 
 				URL url = null;
 				try {
-					url = new URL("http://localhost:5000/discord/api/bs16EZjG84OMLfa1Dx2JFkZ3MkKcyGNd8gOLiMwF3WVpGIE9gFfezGPYAL8/verify/"+playerUUID+"/"+verificationCode);
+					url = new URL("https://api.minebot.app/discord/api/bs16EZjG84OMLfa1Dx2JFkZ3MkKcyGNd8gOLiMwF3WVpGIE9gFfezGPYAL8/verify/"+playerUUID+"/"+verificationCode);
 				} catch (MalformedURLException e) {
 					throw new RuntimeException(e);
 				}
