@@ -14,13 +14,13 @@ export default function Head() {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-     gtag('config', 'G-GLNMX6P0WD', {
-      page_path: window.location.pathname,
-     });
-    `,
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GLNMX6P0WD', {
+page_path: window.location.pathname,
+});
+          `,
         }}
       />
     </>
