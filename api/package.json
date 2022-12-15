@@ -15,7 +15,8 @@
     "revertmigration": "npx typeorm migration:revert -d build/db"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": "17.5.0",
+    "npm": "8.4.1"
   },
   "dependencies": {
     "@foal/core": "^3.0.0",

@@ -19,5 +19,9 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+  },
+  "engines": {
+    "node": "17.5.0",
+    "npm": "8.4.1"
   }
 }
