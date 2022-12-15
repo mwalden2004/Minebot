@@ -2,7 +2,7 @@
 'use client'
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { AdjustmentsVerticalIcon, Bars3Icon, BeakerIcon, ClockIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import {
   BoltIcon,
@@ -11,6 +11,7 @@ import {
   GlobeAltIcon,
   ScaleIcon,
 } from '@heroicons/react/24/outline'
+import { ArrowTrendingUpIcon } from '@heroicons/react/20/solid'
 
 const transferFeatures = [
   {
@@ -18,21 +19,21 @@ const transferFeatures = [
     name: 'Powerful Automations',
     description:
       'MineBot is built for extensabillity, and has many automations to make your life as a community-manager easy.',
-    icon: GlobeAltIcon,
+    icon: BoltIcon,
   },
   {
     id: 2,
     name: 'Built by industry leaders',
     description:
       'Minebot is built by a team of experienced develoeprs who have been working on services and tools for years.',
-    icon: ScaleIcon,
+    icon: ClockIcon,
   },
   {
     id: 3,
     name: 'Feature-Rich',
     description:
       'MineBot still in its infancy has many features and out-shines the commpetition. We still have a long plan ahead to help powerup not only your Discord, but your servers as well.',
-    icon: BoltIcon,
+    icon: AdjustmentsVerticalIcon,
   },
 ]
 const communicationFeatures = [
@@ -41,14 +42,14 @@ const communicationFeatures = [
     name: 'Constantly Developed',
     description:
       'MineBot is constantly adding new features, and fixing bugs.',
-    icon: ChatBubbleBottomCenterTextIcon,
+    icon: BeakerIcon,
   },
   {
     id: 2,
     name: '100% Uptime',
     description:
       'Since our release we have been able to boast a 100% up-time.',
-    icon: EnvelopeIcon,
+    icon: ArrowTrendingUpIcon,
   },
 ]
 
