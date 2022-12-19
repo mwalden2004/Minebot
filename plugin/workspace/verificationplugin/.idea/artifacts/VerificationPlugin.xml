@@ -4,7 +4,6 @@
     <root id="archive" name="VerificationPlugin.jar">
       <element id="module-output" name="verificationplugin" />
       <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
-      <element id="library" level="project" name="Maven: org.json:json:20220924" />
     </root>
   </artifact>
 </component>

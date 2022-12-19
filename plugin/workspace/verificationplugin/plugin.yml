@@ -4,4 +4,4 @@ main: app.minebot.verificationplugin.MainPlugin
 commands:
    verify:
       description: Allows users to verify with Minebot
-      usage: /verify <verification-code>
+      usage: /verify [verification-code]

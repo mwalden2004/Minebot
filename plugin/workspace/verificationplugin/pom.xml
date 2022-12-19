@@ -5,10 +5,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Verification Plugin</name>
   <description>Allows for verification for the Miner</description>
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -20,10 +16,19 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-			<version>1.19-R0.1-SNAPSHOT</version>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+    </dependencies><build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
-
-    </dependencies>
 </project>

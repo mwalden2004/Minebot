@@ -28,7 +28,7 @@ const command: ExportType = {
         const verificationCode = v4();
         const newEmbed = EmbedCreator({title: 'Verification Instructions'});
         newEmbed.addFields({
-            name: 'Step 1: Join our 1.19.2 Verification Server',
+            name: 'Step 1: Join our Verification Server (1.8.8+)',
             value: 'verify.minebot.app'
         }, {
             name: 'Step 2: Enter the command below to verify',
