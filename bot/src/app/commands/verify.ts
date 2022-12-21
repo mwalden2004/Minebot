@@ -39,6 +39,17 @@ const command: ExportType = {
         })
 
 
+
+        // Check if user already has pending verification, if so delete that one.
+        const pendingVerifications = await PendingVerifications.findOne({where:{discordId: interaction.user.id}});
+        if (pendingVerifications){
+            await pendingVerifications.remove();
+            // Notify user
+            newEmbed.setDescription('By the way, we deleted your old pending verification. You can only verify for one account at a time.')
+        }
+
+
+
         // Add our pending verification to our database.
         const newPendingVerification = new PendingVerifications();
         newPendingVerification.uuid = findUuid;

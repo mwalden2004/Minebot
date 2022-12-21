@@ -1,5 +1,5 @@
 import { ButtonInteraction, User } from "discord.js";
-import { PendingVerifications, Users } from "../entities";
+import { PendingVerifications, Users, VerfiedUsers } from "../entities";
 import EmbedCreator from "../utils/EmbedCreator";
 
 export default async function FinishedVerifyingButton(interaction: ButtonInteraction): Promise<any> {
@@ -12,6 +12,8 @@ export default async function FinishedVerifyingButton(interaction: ButtonInterac
     if (!foundPending) {
         return interaction.reply({ephemeral: true, embeds: [EmbedCreator({title: 'We could not find your verification', description: 'Please use the /verify command, then try again.', color: 'Red'})]})
     }
+
+    const minecraftUUID = foundPending.uuid;
 
     // If we found the verification, but the user did not finish verifying then we will prompt them to try again.
     if (!foundPending.verified){
@@ -30,11 +32,22 @@ export default async function FinishedVerifyingButton(interaction: ButtonInterac
     }
 
     // Add the users new account, and then save it.
-    foundUser.accounts.accounts.push(foundPending.uuid)
+    foundUser.accounts.accounts.push(minecraftUUID)
     if (!foundUser.mainAccount){
-        foundUser.mainAccount=foundPending.uuid;
+        foundUser.mainAccount=minecraftUUID;
     }
+
+    // Add functionality for reverse look ups :)
+    let existingVerifiedUser = await VerfiedUsers.findOne({where:{minecraftUUID}});
+    if (!existingVerifiedUser){
+        existingVerifiedUser = new VerfiedUsers();
+        existingVerifiedUser.minecraftUUID = minecraftUUID;
+        existingVerifiedUser.accounts=[];
+    }
+    existingVerifiedUser.accounts.push(interaction.user.id);
+
     await foundUser.save();
+    await existingVerifiedUser.save();
     await foundPending.remove();
 
     // Tell the user it was successfull.
