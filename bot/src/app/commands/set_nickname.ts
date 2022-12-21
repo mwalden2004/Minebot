@@ -9,7 +9,7 @@ const command: ExportType = {
         {
             type: ApplicationCommandOptionType.String,
             name: 'template',
-            description: 'Choices for templates: %username%',
+            description: 'Choices for templates: {minecraft-name} {discord-name}',
             required: true
         },
     ],

@@ -2,7 +2,14 @@ import { GuildMember, PartialGuildMember } from "discord.js";
 import { Guilds, Users } from "../entities";
 import { UUIDtoUsername } from "./Minecraft";
 
-export default async function UpdateGuildMember(member: GuildMember): Promise<boolean>{
+export async function addRole(member: GuildMember, role?: string){
+    if (role) member.roles.add(role);
+}
+export async function removeRole(member: GuildMember, role?: string){
+    if (role) member.roles.remove(role);
+}
+
+export default async function UpdateGuildMember(member: GuildMember): Promise<false|string>{
 
     const guildId = member.guild.id;
     const discordId = member.id;
@@ -13,22 +20,15 @@ export default async function UpdateGuildMember(member: GuildMember): Promise<bo
     const guild = await Guilds.findOne({where:{guildId}});
     const user = await Users.findOne({where:{discordId}});
 
-    if (!guild){
-        return false;
-    }
 
     const isVerified = user && Object.keys(user.accounts).length !== 0;
 
     if (isVerified){
-
         // Check which UUID they're verified with
-
         const account = user.accounts.links[guildId]||user?.mainAccount;
 
         if (!account){
-            if (guild.unverifiedRole){
-                member.roles.add(guild.unverifiedRole);
-            }
+            addRole(member, guild?.unverifiedRole); removeRole(member, guild?.verifiedRole);
             return false;
         }
 
@@ -37,28 +37,21 @@ export default async function UpdateGuildMember(member: GuildMember): Promise<bo
             return false;
         }
 
-        if (guild.verifiedRole){
-            member.roles.add(guild.verifiedRole);
+        // Manage roles
+        addRole(member, guild?.verifiedRole); removeRole(member, guild?.unverifiedRole)
+
+        // Manage nickname templates
+        if (guild?.nicknameTemplate){
+            const template = guild.nicknameTemplate.replaceAll('{minecraft-username}', username).replaceAll('{discord-name}', member.user.username)
+            member.setNickname(template).catch(errr=>{})
         }
 
-        if (guild.nicknameTemplate){
-            member.setNickname(guild.nicknameTemplate.replaceAll('%username%', username)).catch(errr=>{})
-        }
-
-        if (guild.unverifiedRole){
-            member.roles.remove(guild.unverifiedRole);
-        }
-
+        return username;
 
     }else{
-        if (guild.unverifiedRole){
-            member.roles.add(guild.unverifiedRole);
-            if (guild.verifiedRole){
-                member.roles.remove(guild.verifiedRole);
-            }
-        }
-        return true;
+        // Manage roles
+        addRole(member, guild?.unverifiedRole)
+        removeRole(member, guild?.verifiedRole)
+        return false;
     }
-
-    return true;
 }
