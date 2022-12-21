@@ -23,6 +23,12 @@ export class Guilds extends BaseEntity {
   inServer: boolean;
 
   @Column()
+  joinMessages?: {
+    unverified?: string;
+    verified?: string;
+  };
+
+  @Column()
   created: Date;
 
 }

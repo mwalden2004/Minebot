@@ -1,8 +1,12 @@
 import { ButtonInteraction, User } from "discord.js";
 import { PendingVerifications, Users, VerfiedUsers } from "../entities";
 import EmbedCreator from "../utils/EmbedCreator";
+import UpdateGuildMember from "../utils/UpdateGuildMember";
 
 export default async function FinishedVerifyingButton(interaction: ButtonInteraction): Promise<any> {
+    if (!interaction.guild){
+        return;
+    }
 
     // Find any existing pending verifications in the database
     const discordId = interaction.user.id;
@@ -51,6 +55,10 @@ export default async function FinishedVerifyingButton(interaction: ButtonInterac
     await foundPending.remove();
 
     // Tell the user it was successfull.
+    const guildMember = await interaction.guild.members.fetch(interaction.user.id);
+    if (guildMember){
+        UpdateGuildMember(guildMember);
+    }
     return interaction.reply({ephemeral: true, embeds: [EmbedCreator({title: 'Thank you for verifying!', description: 'You have been successfully verified!', color: 'Green'})]})
 
 }
