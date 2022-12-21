@@ -20,9 +20,7 @@ export default async function GuildMemberAdd(member: GuildMember): Promise<void>
             return;
         }
 
-        if (response){
-            message=message.replaceAll(`{discord-name}`, member.user.username).replaceAll('{minecraft-name}', !response ? '' : response);
-        }
+        message=message.split(`{discord-name}`).join(member.user.username).split('{minecraft-name}').join(!response ? '' : response);
 
         member.user.send({
             embeds: [
