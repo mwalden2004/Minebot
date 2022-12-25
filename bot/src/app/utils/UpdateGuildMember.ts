@@ -42,7 +42,7 @@ export default async function UpdateGuildMember(member: GuildMember): Promise<fa
 
         // Manage nickname templates
         if (guild?.nicknameTemplate){
-            const template = guild.nicknameTemplate.split('{minecraft-username}').join(username).split('{discord-name}').join(member.user.username);
+            const template = guild.nicknameTemplate.split('{minecraft-username}').join(username).split('{discord-username}').join(member.user.username).split('{minecraft-name}').join(username).split('{discord-name}').join(member.user.username);
             member.setNickname(template).catch(errr=>{})
         }
 
