@@ -2,6 +2,7 @@ import { DiscordPermissionsBitwiseFlags, ExportType } from "../types/CommandExpo
 import { ApplicationCommandOptionType, Guild } from "discord.js";
 import { Guilds } from "../entities";
 import EmbedCreator from "../utils/EmbedCreator";
+import GuildCreate from "../events/guildCreate";
 const command: ExportType = {
     name: 'setjoinmessage',
     description: 'Set a join message for your guild.',
@@ -46,6 +47,7 @@ const command: ExportType = {
         const message = interaction.options.getString('message', true)||'';
 
         if (!guild.joinMessages){
+            GuildCreate(interaction.guild);
             guild.joinMessages={
                 unverified: '',
                 verified: '',

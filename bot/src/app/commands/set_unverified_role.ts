@@ -2,6 +2,7 @@ import { DiscordPermissionsBitwiseFlags, ExportType } from "../types/CommandExpo
 import { ApplicationCommandOptionType, Guild } from "discord.js";
 import { Guilds } from "../entities";
 import EmbedCreator from "../utils/EmbedCreator";
+import GuildCreate from "../events/guildCreate";
 const command: ExportType = {
     name: 'setunverifiedrole',
     description: 'Set the verified role for your server',
@@ -25,6 +26,7 @@ const command: ExportType = {
         const guild = await Guilds.findOne({where:{guildId: guildId}});
 
         if (!guild){
+            GuildCreate(interaction.guild);
             return false; // this should never happen.
         }
 

@@ -2,6 +2,7 @@ import { DiscordPermissionsBitwiseFlags, ExportType } from "../types/CommandExpo
 import { ApplicationCommandOptionType, Guild } from "discord.js";
 import { Guilds } from "../entities";
 import EmbedCreator from "../utils/EmbedCreator";
+import GuildCreate from "../events/guildCreate";
 const command: ExportType = {
     name: 'setnickname',
     description: 'Set the verified nickname template for your members',
@@ -23,6 +24,7 @@ const command: ExportType = {
 
         const guild = await Guilds.findOne({where:{guildId: interaction.guild.id}});
         if (!guild){
+            GuildCreate(interaction.guild);
             return false;
         }
 
