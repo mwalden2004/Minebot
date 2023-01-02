@@ -23,11 +23,13 @@ const command: ExportType = {
         const role = interaction.options.getRole('role', true);
         const guildId = interaction.guild.id;
 
-        const guild = await Guilds.findOne({where:{guildId: guildId}});
-
+        let guild = await Guilds.findOne({where:{guildId: interaction.guild.id}});
         if (!guild){
-            GuildCreate(interaction.guild);
-            return false; // this should never happen.
+            await GuildCreate(interaction.guild);
+            guild = await Guilds.findOne({where:{guildId: interaction.guild.id}});
+        }
+        if (!guild){
+            return false;
         }
 
 

@@ -22,9 +22,12 @@ const command: ExportType = {
         }
         const template = interaction.options.getString('template', true);
 
-        const guild = await Guilds.findOne({where:{guildId: interaction.guild.id}});
+        let guild = await Guilds.findOne({where:{guildId: interaction.guild.id}});
         if (!guild){
-            GuildCreate(interaction.guild);
+            await GuildCreate(interaction.guild);
+            guild = await Guilds.findOne({where:{guildId: interaction.guild.id}});
+        }
+        if (!guild){
             return false;
         }
 
