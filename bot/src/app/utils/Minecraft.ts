@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 export async function UsernameToUUID(username: string): Promise<string|Error> {
     const req = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
     if (req.status == 204){
-        return new Error(`Unable to find information about ${uuid}`)
+        return new Error(`Unable to find information about ${username}`)
     }
     const resp = await req.json() as {name: string; id: string};
     if (!resp.id){
