@@ -1,9 +1,7 @@
 import { ExportType } from "../types/CommandExports";
-import { ApplicationCommandOptionType } from "discord.js";
-import { UsernameToUUID } from "../utils/Minecraft";
-import { Users } from "../entities";
 import EmbedCreator from "../utils/EmbedCreator";
 import UpdateGuildMember from "../utils/UpdateGuildMember";
+
 const command: ExportType = {
     name: 'updateroles',
     description: 'Update your roles and nickname in the server.',
